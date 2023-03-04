@@ -1,0 +1,15 @@
+﻿1. Wyświetlanie
+2. Mapa
+3. Scrollowanie mapy
+4. Poruszanie postaci
+5. Eventy
+6. Postać
+7. Przeciwnicy
+8. Umiejętności
+9. Dźwięki
+10. Grafika
+11. Rysowanie sprite'ów
+12. Obracanie sprite'ów
+13. Fizyka
+14. Podążanie za celem
+15. Menu
