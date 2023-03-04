@@ -1,0 +1,2 @@
+﻿Projekt ma na celu stworzenie gry w c++ przy użyciu frameworka SFML.
+Gra ma być prostą platformówką, przypominającą konwencją znaną grę Mario.
