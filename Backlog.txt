@@ -1,15 +1,16 @@
-﻿1. Wyświetlanie
-2. Poruszanie postaci
-3. Eventy
-4. Postać
-5. Przeciwnicy
-6. Umiejętności
-7. Dźwięki
-8. Grafika
-9. Rysowanie sprite'ów
-10. Obracanie sprite'ów
-11. Fizyka
-12. Podążanie za celem
-13. Menu
-14. Mapa
-15. Przesuwanie mapy
+﻿1. Wyświetlanie +
+2. Poruszanie postaci +
+3. Fizyka +
+4. Mapa +
+5. Przesuwanie mapy  +
+6. Eventy ?+ (kolizje)
+7. Postać
+8. Przeciwnicy
+9. Umiejętności
+10. Dźwięki
+11. Grafika
+12. Rysowanie sprite'ów
+13. Obracanie sprite'ów
+14. Podążanie za celem
+15. Menu
+16. Elementy na mapie
