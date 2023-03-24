@@ -1,1 +1,2 @@
 C:\Super_Mariusz\x64\Debug\Super_Mariusz.exe
+E:\Super_Mariusz\x64\Debug\Super_Mariusz.exe
