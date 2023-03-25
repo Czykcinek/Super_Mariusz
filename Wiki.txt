@@ -1,2 +1,5 @@
-﻿Projekt ma na celu stworzenie gry w c++ przy użyciu frameworka SFML.
+﻿Projekt dotyczy stworzenia gry w c++ przy użyciu frameworka SFML.
 Gra ma być prostą platformówką, przypominającą konwencją znaną grę Mario.
+W której gracz porusza się po planszy, pokonując różne przeszkody i pokonując wrogów, aby osiągnąć cel.
+Zostanie stworzony prototyp gry, który pozwoli przetestować mechanikę rozgrywki i ocenić, czy jest ona atrakcyjna dla graczy. W tym etapie projektowania należy także skupić się na tworzeniu poziomów, postaci i animacji.
+Jeśli będzie to możliwe to zostaną stworzone proste postacie niezależne, które będą wyświetlać dialogi
