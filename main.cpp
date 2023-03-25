@@ -26,12 +26,20 @@ float y;
 int main()
 {
     RenderWindow window(VideoMode(W1, H1), "Super_Mariusz");
+    
     //RectangleShape shape(Vector2f(SP, WP));
    // shape.setPosition(W1 / 2 - SP, H1 / 2 - WP);
    // shape.setFillColor(Color::Blue);
+    RectangleShape podloga(Vector2f(W1, 50));
 
-    Entity player(50,50);
+        podloga.setPosition(0, H1/2);
+        podloga.setFillColor(Color::Blue);
+       
+      
+        Entity player(50,50);
 
+        FloatRect boundingBox = player.getGlobalBounds();
+        FloatRect PodlogaBox = podloga.getGlobalBounds();
    
 
 
@@ -54,11 +62,11 @@ int main()
             if (event.type == Event::KeyReleased)
                 player.processEvents(event.key.code, false);
 
-
         }
         window.clear();
+        window.draw(podloga);
         player.update();
-        //window.draw(shape);
+        
 
         player.drawTo(window);
         window.display();

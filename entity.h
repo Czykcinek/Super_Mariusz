@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "const.h"
 using namespace sf;
 
 
@@ -10,7 +11,8 @@ using namespace sf;
 
 
 
-class Entity
+class Entity : public Drawable
+	, public Transformable
 {
 private:
 	RectangleShape rect;
@@ -26,9 +28,18 @@ private:
 	float PozY;
 
 public:
+	Sprite m_sprite;
+	Texture m_texture;
+	VertexArray m_vertices;
+	virtual void draw(RenderTarget& target, RenderStates states) const
+	{
+		// You can draw other high-level objects
+		target.draw(m_sprite, states);
+
+	}
 	Entity(float x, float y)
 	{
-		rect.setSize(Vector2f(x, y));
+		rect.draw(Vector2f(x, y));
 		PozX = W1 / 2 - 50;
 		PozY = H1 / 2 - 50;
 		rect.setPosition(PozX,PozY);
@@ -109,8 +120,9 @@ public:
 		
 		if (skok)
 		{
-			movement.y += grawitacja;
+			
 			grawitacja += 0.02;
+			movement.y += grawitacja;
 		}
 
 		rect.move(movement);
@@ -123,5 +135,5 @@ public:
 		window.draw(rect);
 	}
 
-
+	FloatRect getGlobalBounds() const;
 };
