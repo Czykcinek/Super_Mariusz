@@ -2,6 +2,14 @@
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
+
+//TICK
+//pred -=10
+//player.y 
+
+
+
+
 class Entity
 {
 private:
@@ -10,6 +18,9 @@ private:
 	bool down;
 	bool left;
 	bool right;
+	bool bieg;
+	bool skok;
+	float grawitacja = 0;
 
 	float PozX;
 	float PozY;
@@ -25,6 +36,7 @@ public:
 		down = false;
 		left = false;
 		right = false;
+		bieg = false;
 	}
 	void processEvents(Keyboard::Key key, bool checkPressed)
 	{
@@ -42,6 +54,15 @@ public:
 			if (key == Keyboard::D)
 				right = true;
 
+			if (key == Keyboard::C)
+				bieg = true;
+
+			if (key == Keyboard::Space)
+			{
+				skok = true;
+				grawitacja = -1;
+
+			}
 		}
 		if (checkPressed == false)
 		{
@@ -49,7 +70,9 @@ public:
 			down = false;
 			left = false;
 			right = false;
-
+			bieg = false;
+			skok = false;
+			
 		}
 
 	}
@@ -68,6 +91,27 @@ public:
 
 		if (right)
 			movement.x += 0.5;
+
+		if (bieg)
+		{ 
+			if (up)
+				movement.y -= 1.5;
+
+			if (down)
+				movement.y += 1.5;
+
+			if (left)
+				movement.x -= 1.5;
+
+			if (right)
+				movement.x += 1.5;
+		}
+		
+		if (skok)
+		{
+			movement.y += grawitacja;
+			grawitacja += 0.02;
+		}
 
 		rect.move(movement);
 
