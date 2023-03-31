@@ -25,7 +25,7 @@ float y;
 
 int main()
 {
-    RenderWindow window(VideoMode(W1, H1), "Super_Mariusz");
+    RenderWindow window(VideoMode(W1, H1), "Super_Mariusz"); //otworzenie okna
     
     //RectangleShape shape(Vector2f(SP, WP));
    // shape.setPosition(W1 / 2 - SP, H1 / 2 - WP);
@@ -33,11 +33,11 @@ int main()
    
     RectangleShape podloga(Vector2f(W1, 50)); //stworzenie podlogi
 
-        podloga.setPosition(0, H1/2);
+        podloga.setPosition(0, H1);
         podloga.setFillColor(Color::Blue);
        
       
-        Entity player;
+        Entity player; //??????????????????????????????????????????????????????????? czemu to nie dzia³a
 
        /* FloatRect boundingBox = player.getGlobalBounds();
         FloatRect PodlogaBox = podloga.getGlobalBounds();
@@ -68,6 +68,7 @@ int main()
 
         window.clear();
         window.draw(podloga); //rysuje podloge
+       player.draw(window); //rysuje postac
         /*player.update();*/ //aktualizacja pozycji 
         
 

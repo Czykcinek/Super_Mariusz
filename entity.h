@@ -12,8 +12,8 @@ using namespace sf;
 
 
 
-class Entity  : public Drawable
-	, public Transformable
+class Entity 
+	
 {
 private:
 	RectangleShape rect;
@@ -34,11 +34,11 @@ public:
 	VertexArray m_vertices;
 	
 	Entity(/*float x, float y*/) :
-		PozX(0.5f * W1),
+		PozX(0.5f * W1), //ustawienie pozycji postaci
 		PozY(0.5f * H1)
 	{
-		m_texture.loadFromFile("Resources/Images/Mario.png");
-		m_sprite.setTexture(m_texture);
+		m_texture.loadFromFile("Resources/Images/MarioBrake.png"); //za³adowanie tekstury z pliku
+		m_sprite.setTexture(m_texture); //ustawienie tekstury
 		/*
 		rect.draw(Vector2f(x, y));
 		PozX = W1 / 2 - 50;
