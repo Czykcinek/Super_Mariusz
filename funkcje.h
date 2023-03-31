@@ -11,5 +11,5 @@ using namespace std;
 
 
 
-
-void przesun(float PX, float PY, CircleShape& obiektdoprzes);
+//
+//void przesun(float PX, float PY, CircleShape& obiektdoprzes);

@@ -30,17 +30,18 @@ int main()
     //RectangleShape shape(Vector2f(SP, WP));
    // shape.setPosition(W1 / 2 - SP, H1 / 2 - WP);
    // shape.setFillColor(Color::Blue);
-    RectangleShape podloga(Vector2f(W1, 50));
+   
+    RectangleShape podloga(Vector2f(W1, 50)); //stworzenie podlogi
 
         podloga.setPosition(0, H1/2);
         podloga.setFillColor(Color::Blue);
        
       
-        Entity player(50,50);
+        Entity player;
 
-        FloatRect boundingBox = player.getGlobalBounds();
+       /* FloatRect boundingBox = player.getGlobalBounds();
         FloatRect PodlogaBox = podloga.getGlobalBounds();
-   
+   */
 
 
     while (window.isOpen())
@@ -52,23 +53,25 @@ int main()
             
            // shape.move(0.1, 0);
            // window.pollEvent(event);
+
             if (event.type == Event::Closed)
                 window.close();
 
-            if (event.type == Event::KeyPressed)
-                player.processEvents(event.key.code, true);
+            //if (event.type == Event::KeyPressed) //poruszanie sie, jesli nacisniete
+            //    player.processEvents(event.key.code, true);
 
-            
-            if (event.type == Event::KeyReleased)
-                player.processEvents(event.key.code, false);
+            //
+            //if (event.type == Event::KeyReleased)
+            //    player.processEvents(event.key.code, false);
 
         }
+
         window.clear();
-        window.draw(podloga);
-        player.update();
+        window.draw(podloga); //rysuje podloge
+        /*player.update();*/ //aktualizacja pozycji 
         
 
-        player.drawTo(window);
+       /* player.drawTo(window);*/
         window.display();
        
     }

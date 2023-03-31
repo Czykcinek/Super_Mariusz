@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "const.h"
+#include "funkcje.cpp"
 using namespace sf;
 
 
@@ -11,17 +12,17 @@ using namespace sf;
 
 
 
-class Entity : public Drawable
+class Entity  : public Drawable
 	, public Transformable
 {
 private:
 	RectangleShape rect;
-	bool up;
+	/*bool up;
 	bool down;
 	bool left;
 	bool right;
 	bool bieg;
-	bool skok;
+	bool skok;*/
 	float grawitacja = 0;
 
 	float PozX;
@@ -31,14 +32,14 @@ public:
 	Sprite m_sprite;
 	Texture m_texture;
 	VertexArray m_vertices;
-	virtual void draw(RenderTarget& target, RenderStates states) const
+	
+	Entity(/*float x, float y*/) :
+		PozX(0.5f * W1),
+		PozY(0.5f * H1)
 	{
-		// You can draw other high-level objects
-		target.draw(m_sprite, states);
-
-	}
-	Entity(float x, float y)
-	{
+		m_texture.loadFromFile("Resources/Images/Mario.png");
+		m_sprite.setTexture(m_texture);
+		/*
 		rect.draw(Vector2f(x, y));
 		PozX = W1 / 2 - 50;
 		PozY = H1 / 2 - 50;
@@ -48,8 +49,9 @@ public:
 		left = false;
 		right = false;
 		bieg = false;
+		*/
 	}
-	void processEvents(Keyboard::Key key, bool checkPressed)
+	/*void processEvents(Keyboard::Key key, bool checkPressed)
 	{
 		if (checkPressed == true)
 		{
@@ -86,8 +88,8 @@ public:
 			
 		}
 
-	}
-
+	}*/
+	/*
 	void update()
 	{
 		Vector2f movement;
@@ -128,12 +130,23 @@ public:
 		rect.move(movement);
 
 	}
-
-
+	*/
+	void draw(RenderWindow& i_window)
+	{
+		m_sprite.setPosition(round(PozX), round(PozY));
+		i_window.draw(m_sprite);
+	}
+	
+	//void draw(RenderWindow& i_window); //rysowanie tekstur mario
+	
+	/*
 	void drawTo(RenderWindow &window)
 	{
-		window.draw(rect);
+		m_sprite.setPosition(round(PozX),round(PozY))
 	}
-
+	*/
+	/*
 	FloatRect getGlobalBounds() const;
+	*/
+
 };
