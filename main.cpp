@@ -36,8 +36,20 @@ int main()
         podloga.setPosition(0, H1);
         podloga.setFillColor(Color::Blue);
        
-      
-        Entity player; //??????????????????????????????????????????????????????????? czemu to nie dzia³a
+        Map map(W1 / RozmiarKratki);
+        Entity player(50,50); //??????????????????????????????????????????????????????????? czemu to nie dzia³a
+
+
+        for (unsigned short a = 0; a < map.size(); a++)
+        {
+            for (unsigned short b = map[a].size() - 2; b < map[a].size(); b++)
+            {
+                map[a][b] = Cell::Wall;
+            }
+        }
+
+
+
 
        /* FloatRect boundingBox = player.getGlobalBounds();
         FloatRect PodlogaBox = podloga.getGlobalBounds();
@@ -51,25 +63,26 @@ int main()
         while (window.pollEvent(event))
         {
             
-           // shape.move(0.1, 0);
-           // window.pollEvent(event);
+           //shape.move(0.1, 0);
+            window.pollEvent(event);
 
             if (event.type == Event::Closed)
                 window.close();
 
-            //if (event.type == Event::KeyPressed) //poruszanie sie, jesli nacisniete
-            //    player.processEvents(event.key.code, true);
+            if (event.type == Event::KeyPressed) //poruszanie sie, jesli nacisniete
+                player.processEvents(event.key.code, true);
 
-            //
-            //if (event.type == Event::KeyReleased)
-            //    player.processEvents(event.key.code, false);
+            
+            if (event.type == Event::KeyReleased)
+                player.processEvents(event.key.code, false);
 
         }
 
         window.clear();
+        player.update(); //aktualizacja pozycji 
         window.draw(podloga); //rysuje podloge
        player.draw(window); //rysuje postac
-        /*player.update();*/ //aktualizacja pozycji 
+       
         
 
        /* player.drawTo(window);*/
