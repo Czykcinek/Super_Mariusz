@@ -1,4 +1,4 @@
-
+#pragma once
 #include <array>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -9,7 +9,7 @@
 
 using namespace sf;
 using namespace std;
-#include "entity.h"
+
 //definicje funkcji
 
 
@@ -23,33 +23,3 @@ using namespace std;
 //
 //}
 
-void draw_map(RenderWindow& i_window, const Texture& i_map_texture, const Map& i_map)
-{
-	Sprite cell_sprite(i_map_texture);
-
-		for (unsigned short a = 0; a < i_map.size(); a++)
-		{
-
-			for (unsigned short b = 0; b < i_map[a].size(); b++)
-			{
-				if (Cell::Empty == i_map[a][b])
-					continue;
-
-				cell_sprite.setPosition(RozmiarKratki * a, RozmiarKratki * b);
-					
-
-
-
-			}
-
-
-
-
-
-
-
-
-		}
-
-
-}
