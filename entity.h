@@ -17,12 +17,12 @@ class Entity
 {
 private:
 	RectangleShape rect;
-	/*bool up;
+	bool up;
 	bool down;
 	bool left;
 	bool right;
 	bool bieg;
-	bool skok;*/
+	bool skok;
 	float grawitacja = 0;
 
 	float PozX;
@@ -33,25 +33,25 @@ public:
 	Texture m_texture;
 	VertexArray m_vertices;
 	
-	Entity(/*float x, float y*/) :
+	Entity(float x, float y) /* :
 		PozX(0.5f * W1), //ustawienie pozycji postaci
-		PozY(0.5f * H1)
+		PozY(0.5f * H1) */
 	{
 		m_texture.loadFromFile("Resources/Images/MarioBrake.png"); //za³adowanie tekstury z pliku
 		m_sprite.setTexture(m_texture); //ustawienie tekstury
-		/*
-		rect.draw(Vector2f(x, y));
-		PozX = W1 / 2 - 50;
-		PozY = H1 / 2 - 50;
-		rect.setPosition(PozX,PozY);
+		
+		
+		PozX = 0.5f * W1;
+		PozY = 0.5f * H1;
+		//m_texture.setPosition(PozX, PozY);
 		up = false;
 		down = false;
 		left = false;
 		right = false;
 		bieg = false;
-		*/
+		
 	}
-	/*void processEvents(Keyboard::Key key, bool checkPressed)
+	void processEvents(Keyboard::Key key, bool checkPressed)
 	{
 		if (checkPressed == true)
 		{
@@ -88,8 +88,8 @@ public:
 			
 		}
 
-	}*/
-	/*
+	}
+	
 	void update()
 	{
 		Vector2f movement;
@@ -127,10 +127,10 @@ public:
 			movement.y += grawitacja;
 		}
 
-		rect.move(movement);
+		m_sprite.move(movement);
 
 	}
-	*/
+	
 	void draw(RenderWindow& i_window)
 	{
 		m_sprite.setPosition(round(PozX), round(PozY));
