@@ -16,7 +16,7 @@ class Entity
 	
 {
 private:
-	RectangleShape rect;
+	//RectangleShape rect;
 	bool up;
 	bool down;
 	bool left;
@@ -27,22 +27,21 @@ private:
 
 	float PozX;
 	float PozY;
-
+	float MARIO_SPEED;
 public:
 	Sprite m_sprite;
 	Texture m_texture;
 	VertexArray m_vertices;
 	
-	Entity(float x, float y) /* :
+	Entity(/*float x, float y*/)  :
 		PozX(0.5f * W1), //ustawienie pozycji postaci
-		PozY(0.5f * H1) */
+		PozY(0.5f * H1) 
 	{
 		m_texture.loadFromFile("Resources/Images/MarioBrake.png"); //za³adowanie tekstury z pliku
 		m_sprite.setTexture(m_texture); //ustawienie tekstury
 		
 		
-		PozX = 0.5f * W1;
-		PozY = 0.5f * H1;
+		
 		//m_texture.setPosition(PozX, PozY);
 		up = false;
 		down = false;
@@ -92,7 +91,15 @@ public:
 	
 	void update()
 	{
-		Vector2f movement;
+		if (1 == Keyboard::isKeyPressed(Keyboard::Left))
+		{
+			PozX -= MARIO_SPEED;
+		}
+		else if (1 == Keyboard::isKeyPressed(Keyboard::Right))
+		{
+			PozY += MARIO_SPEED;
+		}
+		/*Vector2f movement;
 		if (up)
 			movement.y -= 0.5;
 
@@ -127,7 +134,7 @@ public:
 			movement.y += grawitacja;
 		}
 
-		m_sprite.move(movement);
+		m_sprite.move(movement);*/
 
 	}
 	
