@@ -27,7 +27,7 @@ private:
 
 	float PozX;
 	float PozY;
-	float MARIO_SPEED;
+	float MARIO_SPEED = 0.1; // musi byæ przypisana wartosc bo nie dziala
 public:
 	Sprite m_sprite;
 	Texture m_texture;
@@ -91,13 +91,14 @@ public:
 	
 	void update()
 	{
+		
 		if (1 == Keyboard::isKeyPressed(Keyboard::Left))
 		{
 			PozX -= MARIO_SPEED;
 		}
 		else if (1 == Keyboard::isKeyPressed(Keyboard::Right))
 		{
-			PozY += MARIO_SPEED;
+			PozX += MARIO_SPEED;
 		}
 		/*Vector2f movement;
 		if (up)
