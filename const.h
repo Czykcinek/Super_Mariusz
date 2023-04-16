@@ -17,3 +17,6 @@ enum Cell	//nie wiem
 };
 
 typedef std::vector < std::array<Cell, H1 / RozmiarKratki >> Map; //potrzebne do stworzenia mapy
+
+
+

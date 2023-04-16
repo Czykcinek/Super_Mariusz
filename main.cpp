@@ -1,5 +1,8 @@
 //Super Mariusz, gierka na zaliczenie projektu z przedmiotu In¿ynieria oprogramowania.
-
+//mapa
+//zbieranie monet
+//punkty
+//koniec gry
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
@@ -60,6 +63,22 @@ void drawMap(unsigned i_view_x, const sf::Image& i_map_sketch, sf::RenderWindow&
 
     }
 }
+
+//prostsza mapka
+void drawMap2(RenderWindow& i_window)
+{
+
+    //moja mapka
+    Texture PodlogaTexture;
+    Sprite PodlogaSprite;
+    PodlogaTexture.loadFromFile("Resources/Images/grass_47.png");
+    PodlogaSprite.setTexture(PodlogaTexture);
+
+    PodlogaSprite.setPosition(round((RozciaganieEkranu * W1)/2), round(RozciaganieEkranu*H1));
+    i_window.draw(PodlogaSprite);
+
+}
+
 /*
 struct vector2f
 {
@@ -88,17 +107,17 @@ int main()
         map_texture.loadFromFile("Resources/Images/Map.png");
 
         Map map(W1 / RozmiarKratki);
-        Entity player; //??????????????????????????????????????????????????????????? czemu to nie dzia³a
+        Entity player; 
 
-
-        for (unsigned short a = 0; a < map.size(); a++)
+      /*  for (unsigned short a = 0; a < map.size(); a++)
         {
-            for (unsigned short b = map[a].size() - 2; b < map[a].size(); b++)
+            for (unsigned short b = map[a].size(0) - 2; b < map[a].size(); b++)
             {
                 map[a][b] = Cell::Wall;
+
             }
         }
-
+       */
 
 
 
@@ -132,6 +151,7 @@ int main()
         window.clear();
         player.update(); //aktualizacja pozycji 
         window.draw(podloga); //rysuje podloge
+        drawMap2(window);
        player.draw(window); //rysuje postac
        
         
