@@ -11,19 +11,46 @@ using namespace sf;
 using namespace std;
 
 
-void drawMap(RenderWindow& i_window, const Texture& i_map_texture, const Map& i_map)
+void drawMap(unsigned i_view_x, const sf::Image& i_map_sketch, sf::RenderWindow& i_window, const sf::Texture& i_map_texture, const Map& i_map)
 {
-    Sprite cell_sprite(i_map_texture);
 
-    for (unsigned short a = 0; a < i_map.size(); a++)
     {
-
-        for (unsigned short b = 0; b < i_map[a].size(); b++)
+        Sprite cell_sprite(i_map_texture);
+        unsigned short sprite_x = 0;
+        unsigned short sprite_y = 0;
+        for (unsigned short a = 0; a < i_map.size(); a++)
         {
-            if (Cell::Empty == i_map[a][b])
-                continue;
 
-            cell_sprite.setPosition(RozmiarKratki * a, RozmiarKratki * b);
+            for (unsigned short b = 0; b < i_map[a].size(); b++)
+            {
+                if (Cell::Empty == i_map[a][b])
+                {
+                    continue;
+                }
+                else if (Cell::Wall == i_map[a][b])
+                {
+                    sprite_y = 0;
+                    sprite_x = 1;
+
+                    //if (sf::Color(0, 0, 0) == i_map_sketch.getPixel(a, b)) //Walls
+                    //{
+                    //    sprite_x = 2;
+                    //}
+                    //else //Solid blocks
+                    //{
+                    //    sprite_x = 3;
+                    //}
+                }
+                cell_sprite.setPosition(RozmiarKratki * a, RozmiarKratki * b);
+
+                cell_sprite.setTextureRect(sf::IntRect(RozmiarKratki * sprite_x, RozmiarKratki * sprite_y, RozmiarKratki, RozmiarKratki));
+
+                i_window.draw(cell_sprite);
+            }
+
+
+
+
 
 
 
@@ -31,17 +58,8 @@ void drawMap(RenderWindow& i_window, const Texture& i_map_texture, const Map& i_
         }
 
 
-
-
-
-
-
-
     }
-
-
 }
-
 /*
 struct vector2f
 {
