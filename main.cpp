@@ -77,7 +77,7 @@ void drawMap2(RenderWindow& i_window)
     PodlogaSprite.setPosition(round((RozciaganieEkranu * W1)/2), round(RozciaganieEkranu*H1));
     i_window.draw(PodlogaSprite);
 
-}
+}   
 
 /*
 struct vector2f
