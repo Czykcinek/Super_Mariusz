@@ -1,2 +1,9 @@
-﻿  main.cpp
-  Super_Mariusz.vcxproj -> E:\Super_Mariusz\x64\Debug\Super_Mariusz.exe
+﻿  funkcje.cpp
+C:\Super_Mariusz\Super_Mariusz\entity.h(126,1): warning C4305: "+=": obcięcie z "double" do "float"
+  main.cpp
+C:\Super_Mariusz\Super_Mariusz\entity.h(126,1): warning C4305: "+=": obcięcie z "double" do "float"
+C:\Super_Mariusz\Super_Mariusz\main.cpp(26,70): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Super_Mariusz\Super_Mariusz\main.cpp(26,51): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Super_Mariusz\Super_Mariusz\main.cpp(74,13): warning C4267: "inicjowanie": konwersja z "size_t" do "unsigned short", możliwa utrata danych
+  Generowanie kodu...
+  Super_Mariusz.vcxproj -> C:\Super_Mariusz\Super_Mariusz\x64\Debug\Super_Mariusz.exe

@@ -1,122 +1,134 @@
-//Super Mariusz, gierka na zaliczenie projektu z przedmiotu In¿ynieria oprogramowania.
-
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
 #include <iostream>
-#include "const.h"
-#include "funkcje.h"
-#include "entity.h"
+#include <cstdlib>
+#include <ctime>
+
 using namespace sf;
-using namespace std;
 
-
-void drawMap(RenderWindow& i_window, const Texture& i_map_texture, const Map& i_map)
-{
-    Sprite cell_sprite(i_map_texture);
-
-    for (unsigned short a = 0; a < i_map.size(); a++)
-    {
-
-        for (unsigned short b = 0; b < i_map[a].size(); b++)
-        {
-            if (Cell::Empty == i_map[a][b])
-                continue;
-
-            cell_sprite.setPosition(RozmiarKratki * a, RozmiarKratki * b);
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-    }
-
-
-}
-
-/*
-struct vector2f
-{
-float x;
-float y;
-}
-*/
-
-
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
+const int NUM_COINS = 10;
+const float GRAVITY = 9.81f;
+const float JUMP_SPEED = -300.0f;
+const float MOVE_SPEED = 150.0f;
 
 int main()
 {
-    RenderWindow window(VideoMode(W1, H1), "Super_Mariusz"); //otworzenie okna
-    
-    //RectangleShape shape(Vector2f(SP, WP));
-   // shape.setPosition(W1 / 2 - SP, H1 / 2 - WP);
-   // shape.setFillColor(Color::Blue);
-   
-    RectangleShape podloga(Vector2f(W1, 50)); //stworzenie podlogi
+    // Utwórz okno o wymiarach 800x600
+    RenderWindow window(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Poruszanie postaci¹ z monetami");
 
-        podloga.setPosition(0, H1);
-        podloga.setFillColor(Color::Blue);
-       
-        Map map(W1 / RozmiarKratki);
-        Entity player(50,50); //??????????????????????????????????????????????????????????? czemu to nie dzia³a
+    // Utwórz postaæ jako obiekt RectangleShape
+    RectangleShape character(Vector2f(50.0f, 50.0f));
+    character.setFillColor(Color::Red);
+    character.setPosition(Vector2f(400.0f, 0.0f)); // Ustaw pocz¹tkow¹ pozycjê postaci na górze ekranu
 
+    // Ustaw prêdkoœæ postaci na pocz¹tku
+    Vector2f velocity(0.0f, 0.0f);
+    float gravity = 9.81f; // Sta³a grawitacji
 
-        for (unsigned short a = 0; a < map.size(); a++)
-        {
-            for (unsigned short b = map[a].size() - 2; b < map[a].size(); b++)
-            {
-                map[a][b] = Cell::Wall;
-            }
-        }
+    // Ustaw wartoœci dla skoku
+    bool isJumping = false;
+    float jumpVelocity = -12.0f;
+    int jumpCount = 0;
+    int maxJumpCount = 2;
 
+    // Utwórz monety jako obiekty RectangleShape
+    const int NUM_COINS = 10;
+    RectangleShape coins[NUM_COINS];
+    for (int i = 0; i < NUM_COINS; i++)
+    {
+        coins[i].setSize(Vector2f(30.0f, 30.0f));
+        coins[i].setFillColor(Color::Yellow);
+        coins[i].setPosition(Vector2f((i + 1) * 70.0f, 550.0f));
+    }
 
-
-
-       /* FloatRect boundingBox = player.getGlobalBounds();
-        FloatRect PodlogaBox = podloga.getGlobalBounds();
-   */
-
-
+    // G³ówna pêtla programu
     while (window.isOpen())
     {
-       // window.clear(Color::Green);
+        // Obs³uga zdarzeñ
         Event event;
         while (window.pollEvent(event))
         {
-            
-           //shape.move(0.1, 0);
-            window.pollEvent(event);
-
-            if (event.type == Event::Closed)
+            switch (event.type)
+            {
+            case Event::Closed:
                 window.close();
-
-            if (event.type == Event::KeyPressed) //poruszanie sie, jesli nacisniete
-                player.processEvents(event.key.code, true);
-
-            
-            if (event.type == Event::KeyReleased)
-                player.processEvents(event.key.code, false);
-
+                break;
+            }
         }
 
-        window.clear();
-        player.update(); //aktualizacja pozycji 
-        window.draw(podloga); //rysuje podloge
-       player.draw(window); //rysuje postac
-       
-        
+        // Obs³uga zdarzeñ (w tym obs³uga skoku)
+        if (event.type == Event::KeyPressed)
+        {
+            if (event.key.code == Keyboard::Space && jumpCount < 2) // Space = klawisz skoku
+            {
+                isJumping = true;
+                jumpCount++;
+            }
+        }
 
-       /* player.drawTo(window);*/
+        // Aktualizacja prêdkoœci postaci
+        if (isJumping)
+        {
+            velocity.y = jumpVelocity;
+            jumpVelocity += 1.0f; // Dodanie wartoœci przyspieszenia do prêdkoœci pionowej
+        }
+
+        // Poruszanie postaci¹
+        if (Keyboard::isKeyPressed(Keyboard::Left))
+        {
+            character.move(-0.5f, 0.0f);
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Right))
+        {
+            character.move(0.5f, 0.0f);
+        }
+
+        // Skok postaci
+        if (Keyboard::isKeyPressed(Keyboard::Up) && !isJumping && jumpCount < maxJumpCount)
+        {
+            isJumping = true;
+            velocity.y = jumpVelocity;
+            jumpCount++;
+        }
+        if (!Keyboard::isKeyPressed(Keyboard::Up) && isJumping)
+        {
+            isJumping = false;
+        }
+
+        // Obliczanie si³y grawitacji
+        velocity.y += gravity * 0.01f;
+
+        // Sprawdzenie kolizji z dolnym brzegiem ekranu
+        if (character.getPosition().y + character.getSize().y >= window.getSize().y)
+        {
+            velocity.y = 0.0f; // Resetowanie prêdkoœci pionowej
+            character.setPosition(character.getPosition().x, window.getSize().y - character.getSize().y); // Ustawienie postaci na dolnym brzegu ekranu
+            jumpCount = 0; // Resetowanie licznika skoków
+        }
+
+        // Aktualizacja pozycji postaci na podstawie prêdkoœci
+        character.move(velocity);
+
+        // Sprawdzenie kolizji z monetami
+        for (int i = 0; i < NUM_COINS; i++)
+        {
+            if (coins[i].getGlobalBounds().intersects(character.getGlobalBounds()))
+            {
+                coins[i].setPosition(-100.0f, -100.0f); // Ukryj monetê po zebraniu przez postaæ
+                // Dodaj punkty lub inny efekt po zebraniu monety
+            }
+        }
+
+        // Czyszczenie ekranu i rysowanie postaci i monet
+        window.clear();
+        window.draw(character);
+        for (int i = 0; i < NUM_COINS; i++)
+        {
+            window.draw(coins[i]);
+        }
         window.display();
-       
     }
+
     return 0;
 }
