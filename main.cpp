@@ -71,7 +71,7 @@ void drawMap2(RenderWindow& i_window)
     //moja mapka
     Texture PodlogaTexture;
     Sprite PodlogaSprite;
-    PodlogaTexture.loadFromFile("Resources/Images/grass_47.png");
+    PodlogaTexture.loadFromFile("Resources/Images/grass.png");
     PodlogaSprite.setTexture(PodlogaTexture);
 
     PodlogaSprite.setPosition(round((RozciaganieEkranu * W1)/2), round(RozciaganieEkranu*H1));
@@ -98,6 +98,15 @@ int main()
     Texture coinTexture;
    //ustawienie tekstury coina
     coinTexture.loadFromFile("Resources/Images/Coin.png");
+
+    //tekstura mapy
+    Texture mapTexture;
+    if (!mapTexture.loadFromFile("Resources/Images/grass.png"))
+    {
+        return EXIT_FAILURE;
+    }
+    mapTexture.setRepeated(true); // ustawienie powtarzania tekstury
+
     RenderWindow window(VideoMode(RozciaganieEkranu * W1, RozciaganieEkranu * H1), "Super_Mariusz"); //otworzenie okna
     window.setPosition(Vector2i(window.getPosition().x, window.getPosition().y - 90));
     window.setView(View(FloatRect(0, 0, W1, H1)));
@@ -106,6 +115,15 @@ int main()
    // shape.setFillColor(Color::Blue);
     float srodekW = (RozciaganieEkranu * W1) / 2;
     float srodekH = (RozciaganieEkranu * H1) / 2;
+
+
+    //Tworzenie platformy
+        RectangleShape platform(Vector2f(200, 16));
+    platform.setFillColor(Color::White);
+    platform.setTexture(&mapTexture);
+    platform.setTextureRect(sf::IntRect(0, 0, 200, 16)); // ustawienie fragmentu tekstury odpowiadającego platformie
+    platform.setPosition(1.0f, 163.0f);
+
 
     // Utw�rz monety jako obiekty RectangleShape
     const int NUM_COINS = 10;
@@ -170,6 +188,13 @@ int main()
 
        // }
 
+            //// Sprawdzenie kolizji z platformą
+            //if (player.getGlobalBounds().intersects(platform.getGlobalBounds()))
+            //{
+            //    player.setPosition(player.getPosition().x, platform.getPosition().y - RozmiarKratki);
+            //}
+
+
           // Sprawdzenie kolizji z monetami
         for (int i = 0; i < NUM_COINS; i++)
         {
@@ -185,6 +210,7 @@ int main()
         player.update(); //aktualizacja pozycji 
         window.draw(podloga); //rysuje podloge
         drawMap2(window);
+        window.draw(platform);
        player.draw(window); //rysuje postac
        
        for (int i = 0; i < NUM_COINS; i++)
