@@ -12,7 +12,7 @@ using namespace sf;
 
 
 
-class Entity 
+class Entity : public sf::Drawable, public sf::Transformable
 	
 {
 private:
@@ -43,6 +43,7 @@ public:
 	Texture m_texture;
 	VertexArray m_vertices;
 	
+
 	Entity(/*float x, float y*/)  :
 		PozX(0.5f * W1), //ustawienie pozycji postaci
 		PozY(0.5f * H1) 
@@ -171,5 +172,9 @@ public:
 	/*
 	FloatRect getGlobalBounds() const;
 	*/
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+FloatRect getGlobalBounds() const {
+	return getTransform().transformRect(m_sprite.getGlobalBounds());
+};
 
 };

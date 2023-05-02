@@ -86,7 +86,10 @@ float x;
 float y;
 }
 */
-
+void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    states.transform *= getTransform();
+    target.draw(m_sprite, states);
+}
 
 
 int main()
@@ -163,7 +166,7 @@ int main()
           // Sprawdzenie kolizji z monetami
         for (int i = 0; i < NUM_COINS; i++)
         {
-            if (coins[i].getGlobalBounds().intersects(character.getGlobalBounds()))
+            if (coins[i].getGlobalBounds().intersects(player.getGlobalBounds()))
             {
                 coins[i].setPosition(-100.0f, -100.0f); // Ukryj monet� po zebraniu przez posta�
                 // Dodaj punkty lub inny efekt po zebraniu monety
