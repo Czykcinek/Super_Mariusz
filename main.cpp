@@ -94,6 +94,7 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 int main()
 {
+    int licznikCoin = 0;
     RenderWindow window(VideoMode(RozciaganieEkranu * W1, RozciaganieEkranu * H1), "Super_Mariusz"); //otworzenie okna
     window.setPosition(Vector2i(window.getPosition().x, window.getPosition().y - 90));
     window.setView(View(FloatRect(0, 0, W1, H1)));
@@ -141,7 +142,7 @@ int main()
    */
 
 
-    while (window.isOpen())
+        while (window.isOpen() && licznikCoin < 10)
     {
        //// window.clear(Color::Green);
        // Event event;
@@ -170,6 +171,7 @@ int main()
             {
                 coins[i].setPosition(-100.0f, -100.0f); // Ukryj monet� po zebraniu przez posta�
                 // Dodaj punkty lub inny efekt po zebraniu monety
+                licznikCoin++;
             }
         }
 

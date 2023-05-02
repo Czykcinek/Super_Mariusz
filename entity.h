@@ -172,7 +172,12 @@ public:
 	/*
 	FloatRect getGlobalBounds() const;
 	*/
+
+
+	//jest to potrzebne do dziedziczenia z drawable oraz transformable
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+	//zwracanie kolizji sprite'a
 FloatRect getGlobalBounds() const {
 	return getTransform().transformRect(m_sprite.getGlobalBounds());
 };
