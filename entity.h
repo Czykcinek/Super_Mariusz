@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <SFML/Graphics.hpp>
 #include "const.h"
 #include "funkcje.cpp"
@@ -23,11 +23,21 @@ private:
 	bool right;
 	bool bieg;
 	bool skok;
-	float grawitacja = 0;
+	float grawitacja = 9.0f;
 
 	float PozX;
 	float PozY;
-	float MARIO_SPEED = 0.1; // musi byæ przypisana wartosc bo nie dziala
+	float MARIO_SPEED = 0.1; // musi byÄ‡ przypisana wartosc bo nie dziala
+
+	const float GRAVITY = 9.81f;
+	const float JUMP_SPEED = -300.0f;
+	const float MOVE_SPEED = 150.0f;
+
+	// Ustaw wartoscci dla skoku
+	bool isJumping = false;
+	float jumpVelocity = -12.0f;
+	int jumpCount = 0;
+	int maxJumpCount = 2;
 public:
 	Sprite m_sprite;
 	Texture m_texture;
@@ -37,7 +47,7 @@ public:
 		PozX(0.5f * W1), //ustawienie pozycji postaci
 		PozY(0.5f * H1) 
 	{
-		m_texture.loadFromFile("Resources/Images/MarioBrake.png"); //za³adowanie tekstury z pliku
+		m_texture.loadFromFile("Resources/Images/MarioBrake.png"); //zaÅ‚adowanie tekstury z pliku
 		m_sprite.setTexture(m_texture); //ustawienie tekstury
 		
 		
@@ -50,7 +60,7 @@ public:
 		bieg = false;
 		
 	}
-	void processEvents(Keyboard::Key key, bool checkPressed)
+	/*void processEvents(Keyboard::Key key, bool checkPressed)
 	{
 		if (checkPressed == true)
 		{
@@ -87,7 +97,7 @@ public:
 			
 		}
 
-	}
+	}*/
 	
 	void update()
 	{
@@ -100,6 +110,10 @@ public:
 		{
 			PozX += MARIO_SPEED;
 		}
+		/*else if (1 == Keyboard::isKeyPressed(Keyboard::Space))
+		{
+			PozY += 
+		}*/
 		/*Vector2f movement;
 		if (up)
 			movement.y -= 0.5;
@@ -144,6 +158,7 @@ public:
 		m_sprite.setPosition(round(PozX), round(PozY));
 		i_window.draw(m_sprite);
 	}
+	
 	
 	//void draw(RenderWindow& i_window); //rysowanie tekstur mario
 	

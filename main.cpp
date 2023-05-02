@@ -1,4 +1,4 @@
-//Super Mariusz, gierka na zaliczenie projektu z przedmiotu In�ynieria oprogramowania.
+﻿//Super Mariusz, gierka na zaliczenie projektu z przedmiotu Inżynieria oprogramowania.
 //mapa
 //zbieranie monet
 //punkty
@@ -97,6 +97,18 @@ int main()
     //RectangleShape shape(Vector2f(SP, WP));
    // shape.setPosition(W1 / 2 - SP, H1 / 2 - WP);
    // shape.setFillColor(Color::Blue);
+    float srodekW = (RozciaganieEkranu * W1) / 2;
+    float srodekH = (RozciaganieEkranu * H1) / 2;
+
+    // Utw�rz monety jako obiekty RectangleShape
+    const int NUM_COINS = 10;
+    RectangleShape coins[NUM_COINS];
+    for (int i = 0; i < NUM_COINS; i++)
+    {
+        coins[i].setSize(Vector2f(3.0f, 3.0f));
+        coins[i].setFillColor(Color::Yellow);
+        coins[i].setPosition(Vector2f((i + 1) * 23.0f, 140.0f));
+    }
    
     RectangleShape podloga(Vector2f(W1, 50)); //stworzenie podlogi
 
@@ -148,13 +160,26 @@ int main()
 
        // }
 
+          // Sprawdzenie kolizji z monetami
+        for (int i = 0; i < NUM_COINS; i++)
+        {
+            if (coins[i].getGlobalBounds().intersects(character.getGlobalBounds()))
+            {
+                coins[i].setPosition(-100.0f, -100.0f); // Ukryj monet� po zebraniu przez posta�
+                // Dodaj punkty lub inny efekt po zebraniu monety
+            }
+        }
+
         window.clear();
         player.update(); //aktualizacja pozycji 
         window.draw(podloga); //rysuje podloge
         drawMap2(window);
        player.draw(window); //rysuje postac
        
-        
+       for (int i = 0; i < NUM_COINS; i++)
+       {
+           window.draw(coins[i]);
+       }
 
        /* player.drawTo(window);*/
         window.display();
