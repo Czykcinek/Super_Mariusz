@@ -95,6 +95,9 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 int main()
 {
     int licznikCoin = 0;
+    Texture coinTexture;
+   //ustawienie tekstury coina
+    coinTexture.loadFromFile("Resources/Images/Coin.png");
     RenderWindow window(VideoMode(RozciaganieEkranu * W1, RozciaganieEkranu * H1), "Super_Mariusz"); //otworzenie okna
     window.setPosition(Vector2i(window.getPosition().x, window.getPosition().y - 90));
     window.setView(View(FloatRect(0, 0, W1, H1)));
@@ -106,11 +109,14 @@ int main()
 
     // Utw�rz monety jako obiekty RectangleShape
     const int NUM_COINS = 10;
-    RectangleShape coins[NUM_COINS];
+    sf::Sprite coins[NUM_COINS];
+    //RectangleShape coins[NUM_COINS];
     for (int i = 0; i < NUM_COINS; i++)
     {
-        coins[i].setSize(Vector2f(3.0f, 3.0f));
-        coins[i].setFillColor(Color::Yellow);
+        coins[i].setTexture(coinTexture);
+        coins[i].setTextureRect(sf::IntRect(0, 0, 16, 16));
+        /*coins[i].setSize(Vector2f(3.0f, 3.0f));
+        coins[i].setFillColor(Color::Yellow);*/
         coins[i].setPosition(Vector2f((i + 1) * 23.0f, 140.0f));
     }
    
