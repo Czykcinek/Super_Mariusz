@@ -99,6 +99,8 @@ int main()
    //ustawienie tekstury coina
     coinTexture.loadFromFile("Resources/Images/Coin.png");
 
+    std::vector<sf::RectangleShape> blocks;//definicja blocks
+
     //tekstura mapy
     Texture mapTexture;
     if (!mapTexture.loadFromFile("Resources/Images/grass.png"))
@@ -188,11 +190,11 @@ int main()
 
        // }
 
-            //// Sprawdzenie kolizji z platformą
-            //if (player.getGlobalBounds().intersects(platform.getGlobalBounds()))
-            //{
-            //    player.setPosition(player.getPosition().x, platform.getPosition().y - RozmiarKratki);
-            //}
+            // Sprawdzenie kolizji z platformą
+            if (player.getGlobalBounds().intersects(platform.getGlobalBounds()))
+            {
+                player.setPosition(player.getPosition().x, platform.getPosition().y - RozmiarKratki);
+            }
 
 
           // Sprawdzenie kolizji z monetami
@@ -207,11 +209,12 @@ int main()
         }
 
         window.clear();
-        player.update(); //aktualizacja pozycji 
+        player.draw(window); //rysuje postac
+        player.update(blocks); //aktualizacja pozycji 
         window.draw(podloga); //rysuje podloge
         drawMap2(window);
         window.draw(platform);
-       player.draw(window); //rysuje postac
+      
        
        for (int i = 0; i < NUM_COINS; i++)
        {

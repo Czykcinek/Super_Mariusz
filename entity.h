@@ -24,7 +24,7 @@ private:
 	bool bieg;
 	bool skok;
 	float grawitacja = 9.0f;
-
+	
 	float PozX;
 	float PozY;
 	float MARIO_SPEED = 0.1; // musi być przypisana wartosc bo nie dziala
@@ -100,57 +100,66 @@ public:
 
 	}*/
 	
-	void update()
+	void update(std::vector<sf::RectangleShape>& blocks)
 	{
+		// Ograniczenie pozycji postaci
+		if (PozX < 0) PozX = 0;
+		if (PozX > W1 - getGlobalBounds().width) PozX = W1 - getGlobalBounds().width;
+		if (PozY > H1) PozY = H1;
+		if (PozY < 0) PozY = 0; // dodany warunek, który sprawdza, czy obiekt nie przekroczył górnej granicy ekranu
+	
+			// Sprawdź, czy postać jest w powietrzu
+			bool inAir = true;
+			for (auto& block : blocks) {
+				if (getGlobalBounds().intersects(block.getGlobalBounds())) {
+					if (getGlobalBounds().top + getGlobalBounds().height <= block.getGlobalBounds().top) {
+						inAir = false;
+						PozY = block.getGlobalBounds().top - getGlobalBounds().height;
+						jumpCount = 0;
+						jumpVelocity = JUMP_SPEED;
+					}
+				}
+			}
+
+			// Dodaj grawitację
+			if (inAir) {
+				PozY += GRAVITY;
+			}
+			else {
+				// Skok
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jumpCount < maxJumpCount) {
+					jumpCount++;
+					jumpVelocity = JUMP_SPEED;
+				}
+				else {
+					jumpVelocity += GRAVITY;
+				}
+				PozY += jumpVelocity;
+			}
+
+			// Przemieszczenie postaci
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+				PozX -= MARIO_SPEED;
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+				PozX += MARIO_SPEED;
+			}
+
+			// Ograniczenie pozycji postaci
+			if (PozX < 0) PozX = 0;
+			if (PozX > W1 - getGlobalBounds().width) PozX = W1 - getGlobalBounds().width;
+			if (PozY > H1) PozY = H1;
 		
-		if (1 == Keyboard::isKeyPressed(Keyboard::Left))
+
+		/*if (1 == Keyboard::isKeyPressed(Keyboard::Left))
 		{
 			PozX -= MARIO_SPEED;
 		}
 		else if (1 == Keyboard::isKeyPressed(Keyboard::Right))
 		{
 			PozX += MARIO_SPEED;
-		}
-		/*else if (1 == Keyboard::isKeyPressed(Keyboard::Space))
-		{
-			PozY += 
 		}*/
-		/*Vector2f movement;
-		if (up)
-			movement.y -= 0.5;
-
-		if (down)
-			movement.y += 0.5;
-
-		if (left)
-			movement.x -= 0.5;
-
-		if (right)
-			movement.x += 0.5;
-
-		if (bieg)
-		{ 
-			if (up)
-				movement.y -= 1.5;
-
-			if (down)
-				movement.y += 1.5;
-
-			if (left)
-				movement.x -= 1.5;
-
-			if (right)
-				movement.x += 1.5;
-		}
 		
-		if (skok)
-		{
-			
-			grawitacja += 0.02;
-			movement.y += grawitacja;
-		}
-
-		m_sprite.move(movement);*/
 
 	}
 	
