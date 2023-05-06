@@ -196,6 +196,10 @@ int main()
                 player.colision = 0;
             }
 
+
+           
+
+
           // Sprawdzenie kolizji z monetami
         for (int i = 0; i < NUM_COINS; i++)
         {
