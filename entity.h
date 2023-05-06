@@ -36,18 +36,22 @@ private:
 	// Ustaw wartoscci dla skoku
 	bool isJumping = false;
 	float jumpVelocity = -12.0f;
-	int jumpCount = 0;
+	int score;
+	Font font;
+	sf::Text scoreText;
 	int maxJumpCount = 2;
 public:
+	
 	Sprite m_sprite;
 	Texture m_texture;
 	VertexArray m_vertices;
 	float velocityX = 0;
 	float velocityY = 0;
-
+	int jumpCount = 0;
 	Entity(/*float x, float y*/)  :
 		PozX(1.5f * W1), //ustawienie pozycji postaci
-		PozY(0.5f * H1) 
+		PozY(0.5f * H1),
+		score(0)
 	{
 		m_texture.loadFromFile("Resources/Images/MarioBrake.png"); //załadowanie tekstury z pliku
 		m_sprite.setTexture(m_texture); //ustawienie tekstury
@@ -60,7 +64,23 @@ public:
 		left = false;
 		right = false;
 		bieg = false;
+
+		if (!font.loadFromFile("arial.ttf")) {
+			// obsługa błędu ładowania czcionki
+		}
+
+		scoreText.setFont(font);
+		scoreText.setCharacterSize(30);
+		scoreText.setFillColor(sf::Color::White);
+		scoreText.setPosition(10, 10);
 		
+	}
+	void increaseScore(int points) {
+		score += points;
+		scoreText.setString("Punkty: " + std::to_string(score));
+	}
+	int getScore() const {
+		return score;
 	}
 	/*void processEvents(Keyboard::Key key, bool checkPressed)
 	{
@@ -100,11 +120,19 @@ public:
 		}
 
 	}*/
+	float zero = 0;
 	bool colisionX = 0;
 	bool colisionY = 0;
 	bool colision = 0;
+	//Vector2f velocity(0.1f, 0.1f);
 	void update(std::vector<sf::RectangleShape>& blocks)
 	{
+		
+
+		// Obliczanie si³y grawitacji
+		//velocity.y += grawitacja * 0.01f;
+		
+
 		// Pobierz obwiednię sprita
 		sf::FloatRect bounds = m_sprite.getGlobalBounds();
 		// Ograniczenie pozycji postaci
@@ -185,6 +213,7 @@ public:
 	{
 		m_sprite.setPosition(round(PozX), round(PozY));
 		i_window.draw(m_sprite);
+		i_window.draw(scoreText);
 	}
 	
 	

@@ -14,6 +14,7 @@ using namespace sf;
 using namespace std;
 
 
+
 void drawMap(unsigned i_view_x, const sf::Image& i_map_sketch, sf::RenderWindow& i_window, const sf::Texture& i_map_texture, const Map& i_map)
 {
 
@@ -64,20 +65,20 @@ void drawMap(unsigned i_view_x, const sf::Image& i_map_sketch, sf::RenderWindow&
     }
 }
 
-//prostsza mapka
-void drawMap2(RenderWindow& i_window)
-{
-
-    //moja mapka
-    Texture PodlogaTexture;
-    Sprite PodlogaSprite;
-    PodlogaTexture.loadFromFile("Resources/Images/grass.png");
-    PodlogaSprite.setTexture(PodlogaTexture);
-
-    PodlogaSprite.setPosition(round((/*RozciaganieEkranu * */W1)/2), round(/*RozciaganieEkranu**/H1));
-    i_window.draw(PodlogaSprite);
-
-}   
+////prostsza mapka
+//void drawMap2(RenderWindow& i_window)
+//{
+//
+//    //moja mapka
+//    Texture PodlogaTexture;
+//    Sprite PodlogaSprite;
+//    PodlogaTexture.loadFromFile("Resources/Images/grass.png");
+//    PodlogaSprite.setTexture(PodlogaTexture);
+//
+//    PodlogaSprite.setPosition(round((/*RozciaganieEkranu * */W1)/2), round(/*RozciaganieEkranu**/H1));
+//    i_window.draw(PodlogaSprite);
+//
+//}   
 
 /*
 struct vector2f
@@ -94,6 +95,13 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 int main()
 {
+    //Font font;
+    //player.font.loadFromFile("arial.ttf"); // Ładuj czcionkę
+    //Text scoreText;
+    //scoreText.setFont(font);
+    //scoreText.setCharacterSize(24);
+    //scoreText.setFillColor(Color::White);
+    //scoreText.setPosition(44.0f, 140.0f);
     int licznikCoin = 0;
     Texture coinTexture;
    //ustawienie tekstury coina
@@ -231,14 +239,29 @@ int main()
                 coins[i].setPosition(-100.0f, -100.0f); // Ukryj monet� po zebraniu przez posta�
                 // Dodaj punkty lub inny efekt po zebraniu monety
                 licznikCoin++;
+                player.increaseScore(20);
+                
             }
         }
+        // Aktualizuj tekst punktacji
+   
 
+        
+
+        //// Sprawdzenie kolizji z dolnym brzegiem ekranu
+        //if (player.getPosition().y + player.getSize().y >= window.getSize().y)
+        //{
+        //    player.velocity.y = 0.0f; // Resetowanie prêdkoœci pionowej
+        //    character.setPosition(character.getPosition().x, window.getSize().y - character.getSize().y); // Ustawienie postaci na dolnym brzegu ekranu
+        //    player.jumpCount = 0; // Resetowanie licznika skoków
+        //}
+      
+       
         window.clear();
         player.draw(window); //rysuje postac
         player.update(blocks); //aktualizacja pozycji 
         window.draw(podloga); //rysuje podloge
-        drawMap2(window);
+        /*drawMap2(window);*/
         window.draw(platform);
         window.draw(platform2);
         window.draw(platform3);
