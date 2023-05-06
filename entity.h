@@ -28,7 +28,7 @@ private:
 	float PozX;
 	float PozY;
 	float MARIO_SPEED = 0.1; // musi być przypisana wartosc bo nie dziala
-
+	
 	const float GRAVITY = 9.81f;
 	const float JUMP_SPEED = -300.0f;
 	const float MOVE_SPEED = 150.0f;
@@ -42,10 +42,11 @@ public:
 	Sprite m_sprite;
 	Texture m_texture;
 	VertexArray m_vertices;
-	
+	float velocityX = 0;
+	float velocityY = 0;
 
 	Entity(/*float x, float y*/)  :
-		PozX(0.5f * W1), //ustawienie pozycji postaci
+		PozX(1.5f * W1), //ustawienie pozycji postaci
 		PozY(0.5f * H1) 
 	{
 		m_texture.loadFromFile("Resources/Images/MarioBrake.png"); //załadowanie tekstury z pliku
@@ -99,52 +100,69 @@ public:
 		}
 
 	}*/
-	
+	bool colisionX = 0;
+	bool colisionY = 0;
+	bool colision = 0;
 	void update(std::vector<sf::RectangleShape>& blocks)
 	{
+		// Pobierz obwiednię sprita
+		sf::FloatRect bounds = m_sprite.getGlobalBounds();
 		// Ograniczenie pozycji postaci
 		if (PozX < 0) PozX = 0;
 		if (PozX > W1 - getGlobalBounds().width) PozX = W1 - getGlobalBounds().width;
 		if (PozY > H1) PozY = H1;
 		if (PozY < 0) PozY = 0; // dodany warunek, który sprawdza, czy obiekt nie przekroczył górnej granicy ekranu
 	
-			// Sprawdź, czy postać jest w powietrzu
-			bool inAir = true;
-			for (auto& block : blocks) {
-				if (getGlobalBounds().intersects(block.getGlobalBounds())) {
-					if (getGlobalBounds().top + getGlobalBounds().height <= block.getGlobalBounds().top) {
-						inAir = false;
-						PozY = block.getGlobalBounds().top - getGlobalBounds().height;
-						jumpCount = 0;
-						jumpVelocity = JUMP_SPEED;
-					}
-				}
-			}
+		//	// Sprawdź, czy postać jest w powietrzu
+		//	bool inAir = true;
+		//	for (auto& block : blocks) {
+		//		if (getGlobalBounds().intersects(block.getGlobalBounds())) {
+		//			if (getGlobalBounds().top + getGlobalBounds().height <= block.getGlobalBounds().top) {
+		//				inAir = false;
+		//				PozY = block.getGlobalBounds().top - getGlobalBounds().height;
+		//				jumpCount = 0;
+		//				jumpVelocity = JUMP_SPEED;
+		//			}
+		//		}
+		//	}
 
-			// Dodaj grawitację
-			if (inAir) {
-				PozY += GRAVITY;
-			}
-			else {
-				// Skok
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jumpCount < maxJumpCount) {
-					jumpCount++;
-					jumpVelocity = JUMP_SPEED;
-				}
-				else {
-					jumpVelocity += GRAVITY;
-				}
-				PozY += jumpVelocity;
-			}
+		//	// Dodaj grawitację
+		//	if (inAir) {
+		//		PozY += GRAVITY;
+		//	}
+		//	else {
+		//		// Skok
+		//		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jumpCount < maxJumpCount) {
+		//			jumpCount++;
+		//			jumpVelocity = JUMP_SPEED;
+		//		}
+		//		else {
+		//			jumpVelocity += GRAVITY;
+		//		}
+		//		PozY += jumpVelocity;
+		//	}
 
 			// Przemieszczenie postaci
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-				PozX -= MARIO_SPEED;
+				velocityX -= MARIO_SPEED;
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-				PozX += MARIO_SPEED;
+				velocityX += MARIO_SPEED;
 			}
-
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				velocityY -= MARIO_SPEED;
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+				velocityY += MARIO_SPEED;
+			}
+			PozX = velocityX;
+			
+			if (!colision)
+			{
+				
+				PozY = velocityY;
+			}
+			
 			// Ograniczenie pozycji postaci
 			if (PozX < 0) PozX = 0;
 			if (PozX > W1 - getGlobalBounds().width) PozX = W1 - getGlobalBounds().width;
@@ -190,5 +208,6 @@ public:
 FloatRect getGlobalBounds() const {
 	return getTransform().transformRect(m_sprite.getGlobalBounds());
 };
+
 
 };

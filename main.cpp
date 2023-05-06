@@ -74,7 +74,7 @@ void drawMap2(RenderWindow& i_window)
     PodlogaTexture.loadFromFile("Resources/Images/grass.png");
     PodlogaSprite.setTexture(PodlogaTexture);
 
-    PodlogaSprite.setPosition(round((RozciaganieEkranu * W1)/2), round(RozciaganieEkranu*H1));
+    PodlogaSprite.setPosition(round((/*RozciaganieEkranu * */W1)/2), round(/*RozciaganieEkranu**/H1));
     i_window.draw(PodlogaSprite);
 
 }   
@@ -108,15 +108,15 @@ int main()
         return EXIT_FAILURE;
     }
     mapTexture.setRepeated(true); // ustawienie powtarzania tekstury
-
-    RenderWindow window(VideoMode(RozciaganieEkranu * W1, RozciaganieEkranu * H1), "Super_Mariusz"); //otworzenie okna
+ 
+    RenderWindow window(VideoMode(/*RozciaganieEkranu **/ W1, /*RozciaganieEkranu*//* **/ H1), "Super_Mariusz"); //otworzenie okna
     window.setPosition(Vector2i(window.getPosition().x, window.getPosition().y - 90));
     window.setView(View(FloatRect(0, 0, W1, H1)));
     //RectangleShape shape(Vector2f(SP, WP));
    // shape.setPosition(W1 / 2 - SP, H1 / 2 - WP);
    // shape.setFillColor(Color::Blue);
-    float srodekW = (RozciaganieEkranu * W1) / 2;
-    float srodekH = (RozciaganieEkranu * H1) / 2;
+    /*float srodekW = (RozciaganieEkranu * W1) / 2;
+    float srodekH = (RozciaganieEkranu * H1) / 2;*/
 
 
     //Tworzenie platformy
@@ -125,6 +125,25 @@ int main()
     platform.setTexture(&mapTexture);
     platform.setTextureRect(sf::IntRect(0, 0, 200, 16)); // ustawienie fragmentu tekstury odpowiadającego platformie
     platform.setPosition(1.0f, 163.0f);
+
+    RectangleShape platform2(Vector2f(200, 16));
+    platform2.setFillColor(Color::White);
+    platform2.setTexture(&mapTexture);
+    platform2.setTextureRect(sf::IntRect(0, 0, 200, 16)); // ustawienie fragmentu tekstury odpowiadającego platformie
+    platform2.setPosition(500.0f, 400.0f);
+
+
+    RectangleShape platform3(Vector2f(50, 16));
+    platform3.setFillColor(Color::White);
+    platform3.setTexture(&mapTexture);
+    platform3.setTextureRect(sf::IntRect(0, 0, 200, 16)); // ustawienie fragmentu tekstury odpowiadającego platformie
+    platform3.setPosition(412.0f, 444.0f);
+
+    RectangleShape platform4(Vector2f(80, 16));
+    platform4.setFillColor(Color::White);
+    platform4.setTexture(&mapTexture);
+    platform4.setTextureRect(sf::IntRect(0, 0, 200, 16)); // ustawienie fragmentu tekstury odpowiadającego platformie
+    platform4.setPosition(350.0f, 360.0f);
 
 
     // Utw�rz monety jako obiekty RectangleShape
@@ -189,13 +208,20 @@ int main()
        //         player.processEvents(event.key.code, false);
 
        // }
-
+           
             // Sprawdzenie kolizji z platformą
             if (player.getGlobalBounds().intersects(platform.getGlobalBounds()))
             {
-                player.setPosition(player.getPosition().x, platform.getPosition().y - RozmiarKratki);
+                player.colision = 1;
+                /*player.velocityX = 0;
+                player.velocityY = 0;*/
+               /* player.setPosition(player.getPosition().x, platform.getPosition().y - 0.5f);*/
+              
             }
-
+            else
+            {
+                player.colision = 0;
+            }
 
           // Sprawdzenie kolizji z monetami
         for (int i = 0; i < NUM_COINS; i++)
@@ -214,8 +240,9 @@ int main()
         window.draw(podloga); //rysuje podloge
         drawMap2(window);
         window.draw(platform);
-      
-       
+        window.draw(platform2);
+        window.draw(platform3);
+        window.draw(platform4);
        for (int i = 0; i < NUM_COINS; i++)
        {
            window.draw(coins[i]);
