@@ -48,7 +48,7 @@ public:
 	float velocityX = 0;
 	float velocityY = 0;
 	int jumpCount = 0;
-	Entity(/*float x, float y*/)  :
+	Entity()  :
 		PozX(1.5f * W1), //ustawienie pozycji postaci
 		PozY(0.5f * H1),
 		score(0)
@@ -133,18 +133,16 @@ public:
 			if (PozY > H1) PozY = H1;
 		
 
-		/*if (1 == Keyboard::isKeyPressed(Keyboard::Left))
-		{
-			PozX -= MARIO_SPEED;
-		}
-		else if (1 == Keyboard::isKeyPressed(Keyboard::Right))
-		{
-			PozX += MARIO_SPEED;
-		}*/
+		
 		
 
 	}
-	
+	//obsluga getSize,  zwraca rozmiar (szerokość i wysokość) obiektu m_sprite w postaci wektora sf::Vector2f
+	sf::Vector2f getSize() const
+	{
+		return sf::Vector2f(m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height);
+	}
+
 	void draw(RenderWindow& i_window)
 	{
 		m_sprite.setPosition(round(PozX), round(PozY));
@@ -174,5 +172,5 @@ FloatRect getGlobalBounds() const {
 	return getTransform().transformRect(m_sprite.getGlobalBounds());
 };
 
-
+	
 };

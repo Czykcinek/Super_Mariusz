@@ -65,20 +65,6 @@ void drawMap(unsigned i_view_x, const sf::Image& i_map_sketch, sf::RenderWindow&
     }
 }
 
-////prostsza mapka
-//void drawMap2(RenderWindow& i_window)
-//{
-//
-//    //moja mapka
-//    Texture PodlogaTexture;
-//    Sprite PodlogaSprite;
-//    PodlogaTexture.loadFromFile("Resources/Images/grass.png");
-//    PodlogaSprite.setTexture(PodlogaTexture);
-//
-//    PodlogaSprite.setPosition(round((/*RozciaganieEkranu * */W1)/2), round(/*RozciaganieEkranu**/H1));
-//    i_window.draw(PodlogaSprite);
-//
-//}   
 
 /*
 struct vector2f
@@ -157,6 +143,16 @@ int main()
         coins[i].setPosition(Vector2f((i + 1) * 23.0f, 140.0f));
     }
    
+    const int NUM_COINS2 = 3;
+    sf::Sprite coins2[NUM_COINS2];
+    //RectangleShape coins[NUM_COINS];
+    for (int i = 0; i < NUM_COINS2; i++)
+    {
+        coins2[i].setTexture(coinTexture);
+        coins2[i].setTextureRect(sf::IntRect(0, 0, 16, 16));
+        coins2[i].setPosition(Vector2f((i + 1) * 500.0f, 380.0f));
+    }
+
     RectangleShape podloga(Vector2f(W1, 50)); //stworzenie podlogi
 
         podloga.setPosition(0, H1);
@@ -213,7 +209,18 @@ int main()
             }
         }
      
+        // Sprawdzenie kolizji z monetami 2
+        for (int i = 0; i < NUM_COINS2; i++)
+        {
+            if (coins2[i].getGlobalBounds().intersects(player.getGlobalBounds()))
+            {
+                coins2[i].setPosition(-100.0f, -100.0f); // Ukryj monet� po zebraniu przez posta�
+                // Dodaj punkty lub inny efekt po zebraniu monety
+                licznikCoin++;
+                player.increaseScore(20);
 
+            }
+        }
         
 
         //// Sprawdzenie kolizji z dolnym brzegiem ekranu
@@ -237,6 +244,11 @@ int main()
        for (int i = 0; i < NUM_COINS; i++)
        {
            window.draw(coins[i]);
+       }
+      
+       for (int i = 0; i < NUM_COINS2; i++)
+       {
+           window.draw(coins2[i]);
        }
 
        /* player.drawTo(window);*/
