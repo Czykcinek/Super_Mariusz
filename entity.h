@@ -65,13 +65,13 @@ public:
 		right = false;
 		bieg = false;
 
-		if (!font.loadFromFile("arial.ttf")) {
+		if (!font.loadFromFile("Resources/Fonts/SuperMario256.ttf")) {
 			// obsługa błędu ładowania czcionki
 		}
 
 		scoreText.setFont(font);
 		scoreText.setCharacterSize(30);
-		scoreText.setFillColor(sf::Color::White);
+		scoreText.setFillColor(sf::Color::Red);
 		scoreText.setPosition(10, 10);
 		
 	}

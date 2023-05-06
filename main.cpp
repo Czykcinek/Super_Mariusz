@@ -95,13 +95,7 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 int main()
 {
-    //Font font;
-    //player.font.loadFromFile("arial.ttf"); // Ładuj czcionkę
-    //Text scoreText;
-    //scoreText.setFont(font);
-    //scoreText.setCharacterSize(24);
-    //scoreText.setFillColor(Color::White);
-    //scoreText.setPosition(44.0f, 140.0f);
+    
     int licznikCoin = 0;
     Texture coinTexture;
    //ustawienie tekstury coina
