@@ -114,11 +114,7 @@ int main()
     RenderWindow window(VideoMode(/*RozciaganieEkranu **/ W1, /*RozciaganieEkranu*//* **/ H1), "Super_Mariusz"); //otworzenie okna
     window.setPosition(Vector2i(window.getPosition().x, window.getPosition().y - 90));
     window.setView(View(FloatRect(0, 0, W1, H1)));
-    //RectangleShape shape(Vector2f(SP, WP));
-   // shape.setPosition(W1 / 2 - SP, H1 / 2 - WP);
-   // shape.setFillColor(Color::Blue);
-    /*float srodekW = (RozciaganieEkranu * W1) / 2;
-    float srodekH = (RozciaganieEkranu * H1) / 2;*/
+   
 
 
     //Tworzenie platformy
@@ -184,32 +180,11 @@ int main()
 
 
 
-       /* FloatRect boundingBox = player.getGlobalBounds();
-        FloatRect PodlogaBox = podloga.getGlobalBounds();
-   */
-
+     
 
         while (window.isOpen() && licznikCoin < 10)
     {
-       //// window.clear(Color::Green);
-       // Event event;
-       // while (window.pollEvent(event))
-       // {
-       //     
-       //    //shape.move(0.1, 0);
-       //     window.pollEvent(event);
-
-       //     if (event.type == Event::Closed)
-       //         window.close();
-
-       //     if (event.type == Event::KeyPressed) //poruszanie sie, jesli nacisniete
-       //         player.processEvents(event.key.code, true);
-
-       //     
-       //     if (event.type == Event::KeyReleased)
-       //         player.processEvents(event.key.code, false);
-
-       // }
+      
            
             // Sprawdzenie kolizji z platformą
             if (player.getGlobalBounds().intersects(platform.getGlobalBounds()))
@@ -237,8 +212,7 @@ int main()
                 
             }
         }
-        // Aktualizuj tekst punktacji
-   
+     
 
         
 

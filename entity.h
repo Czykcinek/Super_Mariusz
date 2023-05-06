@@ -82,44 +82,7 @@ public:
 	int getScore() const {
 		return score;
 	}
-	/*void processEvents(Keyboard::Key key, bool checkPressed)
-	{
-		if (checkPressed == true)
-		{
-			if (key == Keyboard::W)
-				up = true;
-
-			if (key == Keyboard::S)
-				down = true;
-
-			if (key == Keyboard::A)
-				left = true;
-
-			if (key == Keyboard::D)
-				right = true;
-
-			if (key == Keyboard::C)
-				bieg = true;
-
-			if (key == Keyboard::Space)
-			{
-				skok = true;
-				grawitacja = -1;
-
-			}
-		}
-		if (checkPressed == false)
-		{
-			up = false;
-			down = false;
-			left = false;
-			right = false;
-			bieg = false;
-			skok = false;
-			
-		}
-
-	}*/
+	
 	float zero = 0;
 	bool colisionX = 0;
 	bool colisionY = 0;
@@ -141,34 +104,7 @@ public:
 		if (PozY > H1) PozY = H1;
 		if (PozY < 0) PozY = 0; // dodany warunek, który sprawdza, czy obiekt nie przekroczył górnej granicy ekranu
 	
-		//	// Sprawdź, czy postać jest w powietrzu
-		//	bool inAir = true;
-		//	for (auto& block : blocks) {
-		//		if (getGlobalBounds().intersects(block.getGlobalBounds())) {
-		//			if (getGlobalBounds().top + getGlobalBounds().height <= block.getGlobalBounds().top) {
-		//				inAir = false;
-		//				PozY = block.getGlobalBounds().top - getGlobalBounds().height;
-		//				jumpCount = 0;
-		//				jumpVelocity = JUMP_SPEED;
-		//			}
-		//		}
-		//	}
-
-		//	// Dodaj grawitację
-		//	if (inAir) {
-		//		PozY += GRAVITY;
-		//	}
-		//	else {
-		//		// Skok
-		//		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jumpCount < maxJumpCount) {
-		//			jumpCount++;
-		//			jumpVelocity = JUMP_SPEED;
-		//		}
-		//		else {
-		//			jumpVelocity += GRAVITY;
-		//		}
-		//		PozY += jumpVelocity;
-		//	}
+		
 
 			// Przemieszczenie postaci
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
