@@ -87,13 +87,13 @@ public:
 	bool colisionX = 0;
 	bool colisionY = 0;
 	bool colision = 0;
-	//Vector2f velocity(0.1f, 0.1f);
+	Vector2f velocity = Vector2f(0.0f, 0.0f);
 	void update(std::vector<sf::RectangleShape>& blocks)
 	{
 		
 
-		// Obliczanie si³y grawitacji
-		//velocity.y += grawitacja * 0.01f;
+		//Obliczanie si³y grawitacji
+		velocity.y += grawitacja * 0.01f;
 		
 
 		// Pobierz obwiednię sprita
@@ -108,23 +108,23 @@ public:
 
 			// Przemieszczenie postaci
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-				velocityX -= MARIO_SPEED;
+				velocity.x -= MARIO_SPEED;
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-				velocityX += MARIO_SPEED;
+				velocity.x += MARIO_SPEED;
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				velocityY -= MARIO_SPEED;
+				velocity.y -= MARIO_SPEED;
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				velocityY += MARIO_SPEED;
+				velocity.y += MARIO_SPEED;
 			}
-			PozX = velocityX;
+			PozX = velocity.x;
 			
 			if (!colision)
 			{
 				
-				PozY = velocityY;
+				PozY = velocity.y;
 			}
 			
 			// Ograniczenie pozycji postaci

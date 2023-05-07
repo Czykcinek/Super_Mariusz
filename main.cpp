@@ -17,6 +17,18 @@ using namespace std;
 
 
 
+
+
+
+
+
+        
+
+
+    
+
+
+
 /*
 struct vector2f
 {
@@ -177,6 +189,13 @@ int main()
             }
         }
         
+        //sprawdzenie kolizji z dołem ekranu
+        if (player.getPosition().y + player.getSize().y >= window.getSize().y)
+        {
+            player.velocity.y = 0.0f;
+                player.setPosition(player.getPosition().x, window.getSize().y - player.getSize().y);
+            player.jumpCount = 0;
+        }
 
         //// Sprawdzenie kolizji z dolnym brzegiem ekranu
         //if (player.getPosition().y + player.getSize().y >= window.getSize().y)
