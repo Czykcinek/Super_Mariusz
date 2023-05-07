@@ -35,7 +35,7 @@ private:
 
 	// Ustaw wartoscci dla skoku
 	bool isJumping = false;
-	float jumpVelocity = -12.0f;
+	float jumpVelocity = 2.0f;
 	int score;
 	Font font;
 	sf::Text scoreText;
@@ -119,9 +119,25 @@ public:
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 				velocity.y += MARIO_SPEED;
 			}
+			// Obs³uga zdarzeñ (w tym obs³uga skoku)
+			
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jumpCount < 2) // Space = klawisz skoku
+				{
+					isJumping = true;
+					jumpCount++;
+				}
+			
+
+			// Aktualizacja prêdkoœci postaci
+			if (isJumping)
+			{
+				velocity.y = jumpVelocity;
+				jumpVelocity += 1.0f; // Dodanie wartoœci przyspieszenia do prêdkoœci pionowej
+			}
+
 			PozX = velocity.x;
 			
-			if (!colision)
+			if (colision == 0 && isJumping == 1)
 			{
 				
 				PozY = velocity.y;

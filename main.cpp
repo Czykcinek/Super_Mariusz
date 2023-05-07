@@ -94,7 +94,7 @@ int main()
 
 
     // Utw�rz monety jako obiekty RectangleShape
-    const int NUM_COINS = 10;
+    const int NUM_COINS = 7;
     sf::Sprite coins[NUM_COINS];
     //RectangleShape coins[NUM_COINS];
     for (int i = 0; i < NUM_COINS; i++)
@@ -140,8 +140,8 @@ int main()
 
 
      
-
-        while (window.isOpen() && licznikCoin < 10)
+              //koniec gry po zebraniu tylu monet:
+        while (window.isOpen() && licznikCoin < 7)
     {
       
            
